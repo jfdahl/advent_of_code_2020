@@ -2,23 +2,30 @@
 
 // Puzzle URL: 
 
-var lib = require('./lib'),
-    // filename = 'input_sample.txt',
-    filename = 'input.txt',
-    input = lib.readFile(filename),
+var lib = require('../lib'),
+    sample = lib.readFile('input_sample.txt'),
+    input = lib.readFile('input.txt'),
     print = console.log,
     table = console.table;
     
 
-/*
+/*****************************************
  *  Main
- */ 
-print( part1() );
+ *****************************************/ 
 
+var result = {},
+    sample = cleanData( sample ),
+    input = cleanData( input ),
+    total = 2020;
 
-/*
- * FUNCTIONS 
- */
+result['Part 1'] = { 'Sample Input': part1( sample ), 'Real Input': part1( input ) };
+result['Part 2'] = { 'Sample Input': part2( sample ), 'Real Input': part2( input ) };
+
+table( result );
+
+/*****************************************
+ *  FUNCTIONS
+ *****************************************/ 
 
 function cleanData( input ){
     /** 
@@ -28,35 +35,40 @@ function cleanData( input ){
      * convert the elements to integers, and
      * return the result.
     */
-    return input
-        .split( '\n' )
-        .sort( ( a, b ) => b-a )
-        .map( num => { return parseInt( num ); } );
+    var arrData = input.split( '\n' );
+    arrData = lib.arrParseInt( arrData );
+    arrData = lib.numSort( arrData );
+    
+    return arrData;
 }
         
-function isAddend( num, total, data ){
-    /**
-     * Given a number,
-     * subtract the number from the total,
-     * check if the result is in the data.
-     * If the result is found in the data, return the result, otherwise
-     * return a boolean false.
-     */
+function part1( data ){
+    var num1, num2;        
 
-    var tmpMatch = total - num;
-    return data.indexOf( tmpMatch ) >=0 ? tmpMatch : false;
-}
-
-function part1(){
-    var num1, num2,
-        total = 2020,
-        data = cleanData( input );
-
-    for( var i=0, l=data.length; i<l; i++ ){
+    for( var i=0, l=data.length-1; i<l; i++ ){
         num1 = data[i];
-        num2 = isAddend( num1, total, data );
-        if( num2 ){
+        num2 = total - num1;
+        if( data.indexOf( num2 ) >=0 ){
             return num1 * num2;
         }
     }
+
+    return 'No answer found.';
+}
+
+function part2( data ){
+    var num1, num2, num3;
+
+    for( var i=0, l=data.length-2; i<l; i++ ){
+        for( j=i+1, k=l-i; j<k; j++){
+            num1 = data[i];
+            num2 = data[j];
+            num3 = total - (num1 + num2);
+            if( data.indexOf( num3 ) >=0 ){
+                return num1 * num2 * num3;
+            }
+        }
+    }
+
+    return 'No answer found.';
 }
