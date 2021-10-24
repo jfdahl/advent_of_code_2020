@@ -2,7 +2,7 @@
 
 // Puzzle URL: 
 
-var lib = require('./lib'),
+var lib = require('../lib'),
     sample = lib.readFile('input_sample.txt'),
     input = lib.readFile('input.txt'),
     print = console.log,
