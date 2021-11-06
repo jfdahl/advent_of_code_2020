@@ -17,10 +17,13 @@ var result = {},
     sample = cleanData( sample ),
     input = cleanData( input );
 
+table( sample );
+// table( input );
+
 result['Part 1'] = { 'Sample Input': part1( sample ), 'Real Input': part1( input ) };
 result['Part 2'] = { 'Sample Input': part2( sample ), 'Real Input': part2( input ) };
 
-table( result );
+// table( result );
 
 
 /*****************************************
@@ -34,17 +37,34 @@ function cleanData( input ){
      * clean and format the raw information into usable data, and
      * return the data.
     */
-    return input
-        .split( '\n' )
-        .sort( ( a, b ) => b-a ) // Numeric sorting in Descending order
-        .map( num => { return parseInt( num ); } );
+    return input.split( '\n' );
 }
 
-function part1(){
-    return 'Part 1 answer';
+function part1( data ){
+    
+    data.forEach( function( ticket ){
+        var row = [0,127],
+            col = [0,7];
+
+        ticket.split('').forEach( function( step ){
+            
+        });
+    });
 }
 
-function part2(){
-    return 'Part 2 answer';
+function part2( data ){
+    return data;
 }
 
+function half( range, code ){
+    var min = range[0],
+        max = range[1],
+        mid = Math.floor( (max - min) / 2 ) + min;
+    
+    if( code == 'F' || code == 'L' ){
+        return [ min, mid ];
+    }
+    else{
+        return [ mid+1, max ];
+    }
+}
