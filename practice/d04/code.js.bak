@@ -108,12 +108,12 @@ function part2( data ){
         if( result === true ){
             count++;
         }
-        // else{
-        //     if( result.indexOf('Missing Fields') != 0 ){
-        //         result += ' ' + passport[result] + ' is not: ' + requirements[result];
-        //     }
-        //     //print( 'Error: ' + result );
-        // }
+        else{
+            if( result.indexOf('Missing Fields') != 0 ){
+                result += ' ' + passport[result] + ' is not: ' + requirements[result];
+            }
+            //print( 'Error: ' + result );
+        }
     });
 
     // table( data );
@@ -125,7 +125,7 @@ function isValidPassport2( passport ){
 
     // print('Passport: ' + JSON.stringify(passport) );
 
-    if( keys.length < 7 ){ return 'Missing Fields'; }
+    if( keys.length < 8 ){ return 'Missing Fields'; }
 
     // Is byr between 1920 and 2002?
     var byr = Number( passport.byr );
