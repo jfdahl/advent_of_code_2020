@@ -13,3 +13,7 @@ exports.numSort = function( arr, order ){
 exports.arrParseInt = function( arr ){
     return arr.map( num => { return parseInt( num ); } );
 }
+
+exports.arrParseNum = function( arr ){
+    return arr.map( num => { return Number( num ); } );
+}
